@@ -1,0 +1,28 @@
+# extra for WSL
+
+# Startup
+umask 022
+export DISPLAY=:0
+export LC_ALL=zh_CN.UTF-8
+export QT_IM_MODULE=fcitx
+export GTK_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+
+# Alias
+alias cmd=cmd.exe
+alias fm=explorer.exe
+
+# Functions
+function i3() {
+  #sudome /etc/init.d/dbus start
+  #sudome /etc/init.d/ssh start
+  compton -b
+  feh --bg-fill /home/kahsolt/Pictures/Shota/Shotachan/Telegram/photo_2017-12-10_10-15-54.jpg
+  /usr/bin/i3 &
+}
+function im() {
+  pkill -9 sogou-qimpanel
+  pkill -9 fcitx
+  (fcitx-autostart > /dev/null) &
+  (sogou-qimpanel > /dev/null)  &
+}

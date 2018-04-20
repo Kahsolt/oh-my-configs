@@ -1,0 +1,104 @@
+# Functions
+function prx() {
+  case $1 in
+    on)
+      export http_proxy=127.0.0.1:1080
+      export https_proxy=127.0.0.1:1080
+      # export ftp_proxy=user:password@proxy.abc.com:8080
+      export no_proxy=*.buaa.edu.cn,*.tuna.tsinghua.edu.cn,10.*.*.*,192.168.137.*,localhost,127.0.0.1,arkadia6
+      ;;
+    off)
+      export http_proxy=
+      export https_proxy=
+      ;;
+    show)
+      echo http_proxy=$http_proxy
+      echo https_proxy=$https_proxy
+      echo ftp_proxy=$ftp_proxy
+      echo no_proxy=$no_proxy
+      ;;
+    *)
+      cat << HELP
+proxy status function - by Kahsolt 2017/9/5
+Usage: prx on|off|show
+HELP
+      ;;
+   esac
+}
+alias noProxy='prx off'
+
+function aptGo() {
+  noProxy
+  sudome apt -y update && apt -y upgrade
+  sudome apt -y autoremove
+  sudome apt -y autoclean
+}
+
+function pacmanGo() {
+  noProxy
+  pacman -Syu
+  pacman -Qdt
+  #xargs pacman -Rncus
+}
+alias pm='pacman'
+alias pms='pacman -S'
+
+function pipGo() {
+  noProxy
+  sudome pip list --format=freeze | cut -d = -f 1 | xargs pip install --upgrade
+  sudome pip3 list --format=freeze | cut -d = -f 1 | xargs pip3 install --upgrade
+}
+
+function gemGo() {
+  noProxy
+  sudome gem update
+  sudome gem update --system
+}
+
+function nasmf() {
+  if [ $1 ]; then
+    asm -f elf64 $1
+    ld -m elf_x86_64 $1.o -o $1
+    chmod +x $1
+    yes|rm $out.o
+  else
+    cat << HELP
+nasm & ld function - by Kahsolt 2016/11/5
+Usage: nasmf <filename>   ; no suffix
+HELP
+  fi
+}
+
+function gccf() {
+  if [ $1 ]; then
+    gcc -ansi $1.c -o $1
+    chmod +x $1
+  else
+    cat << HELP
+gcc(ANSI) function - by Kahsolt 2017/9/15
+Usage: gccf <filename>   ; no suffix
+HELP
+  fi
+}
+
+function nvccf() {
+  if [ $1 ]; then
+    nvcc -ccbin clang-3.8 -arch sm_21 -Wno-deprecated-gpu-targets $1.cu -o $1
+  else
+    cat << HELP
+nvcc function - by Kahsolt 2017/9/21
+Usage: nvccf <filename>   ; no suffix
+HELP
+  fi
+}
+
+function 7za() {
+  if [ $1 ]; then
+    7z a -mx9 $1.7z $1
+  else
+    cat << HELP
+7z add function - by Kahsolt 2017/10/27
+Usage: 7za <dir/file name>
+HELP
+  fi
+}

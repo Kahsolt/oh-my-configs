@@ -1,0 +1,127 @@
+# Root ACL
+alias sudome='echo 1379 | sudo -S'
+
+# Proxy
+export http_proxy=127.0.0.1:8123
+export https_proxy=127.0.0.1:8123
+export no_proxy="*.buaa.edu.cn,*.tuna.tsinghua.edu.cn,10.*.*.*,192.168.137.*,localhost,127.0.0.1,Arkadia6"
+# for chomium
+export SOCKS_SERVER=127.0.0.1:1080
+export SOCKS_VERSION=5
+
+# Paths
+#export GOPATH='/home/kahsolt/Documents/Go'
+#export ANACONDA_HOME='/opt/anaconda3'
+export NODE_HOME='/opt/node-v8.9.3-linux-x64'
+export NODE_PATH="$NODE_HOME/lib/node_modules"
+export JAVA_HOME='/opt/jdk-9.0.4'
+export KOTLIN_HOME='/opt/kotlin-1.2.31'
+export HADOOP_HOME='/opt/hadoop-3.0.0'
+export HBASE_HOME='/opt/hbase-2.0.0-beta-2'
+export NUTCH_HOME='/opt/apache-nutch-2.3.1'
+export SOLR_HOME='/opt/solr-7.2.1'
+#export HIVE_HOME='/opt/apache-hive-2.1.1-bin'
+#export MAHOUT_HOME='/opt/apache-mahout-distribution-0.13.0'
+#export PIG_HOME='/opt/pig-0.17.0'
+#export SPARK_HOME='/opt/spark-2.1.1-bin-hadoop2.7'
+
+#export PATH="$PATH:$ANACONDA_HOME/bin"
+export PATH="$PATH:$NODE_HOME/bin"
+export PATH="$PATH:$JAVA_HOME/bin"
+export PATH="$PATH:$KOTLIN_HOME/bin"
+export PATH="$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin"
+export PATH="$PATH:$HBASE_HOME/bin"
+export PATH="$PATH:$NUTCH_HOME/bin"
+#export PATH="$PATH:$HIVE_HOME/bin"
+#export PATH="$PATH:$MAHOUT_HOME/bin"
+#export PATH="$PATH:$PIG_HOME/bin"
+#export PATH="$PATH:$SPARK_HOME/bin"
+
+# Dirs
+wallpapers="$HOME/Pictures/Wallpaper"
+screenshot="$HOME/Pictures/Screenshot"
+web="/var/www/html"
+ws="$HOME/Documents"
+note="$ws/@巫女の日记"
+# projects
+idea="$ws/IdeaProjects"
+pycharm="$ws/PycharmProjects"
+rubymine="$ws/RubymineProjects"
+mc="$ws/Minecraft"
+
+# Aliases
+alias l='ls -CFh'
+alias la='ls -Ah'
+alias ll='ls -lh'
+alias lla='ls -lAh'
+alias rmr='rm -r'
+alias cp='cp -v'
+alias cpr='cp -R'
+alias df='df -Th'
+alias du='du -h'
+alias dus='du -sh'
+alias dux='la|xargs du -sh'
+alias cn='cat -n'
+alias pst=pstree
+alias free='free -h'
+alias chm=chmod
+alias chm755644='sh -c "(find . -type d | xargs chmod 755) && (find . -type f | xargs chmod 644)"'
+alias cho='sudome chown'
+alias chome='sudome chown -R kahsolt:kahsolt .'
+alias chopc='compton -b'
+alias chwall='feh --bg-scale --randomize $wallpapers'
+alias resource='source $HOME/.zshrc'
+alias realiases='nano $HOME/.zsh_aliases && resource'
+
+alias lua=lua5.3
+alias ilua='lua5.3 -i -e "dir=function(t) for k,v in pairs(t) do print(k,v) end end"'
+alias rb=ruby
+alias py=python3
+alias py2=python
+alias py3=python3
+#alias pycd='$ANACONDA_HOME/bin/python'
+alias ipy=ipython3
+alias jv=java
+alias jc=javac
+alias jj='java -jar'
+alias kt='kotlin'
+alias ktc='kotlinc'
+alias kts='kotlinc -script'
+alias tm='$HOME/.tmuxrc'
+alias ed=nano
+alias www=chromium-browser
+#alias jisho=tagainijisho
+#alias cpu='sudome i7z'
+#alias sd=alsamixer
+#alias kb=showkey
+#alias kmap='xmodmap -pke'
+#alias xevent=xev
+#alias projector='xrandr --output HDMI-1 --same-as eDP-1 --mode 1360x768'
+#alias wl='sudome sh -c "ifconfig wifi0 && iwconfig wifi0"'
+#alias nmwifi='nmcli -f in-use,ssid,bssid,mode,chan,rate,signal,bars dev wifi list'
+#alias nvrun='optirun -b primus'
+#alias nvrunNoVSync='vblank_mode=0 optirun -b primus'
+#alias refcitx='pkill -9 fcitx && fcitx-autostart && sogou-qimpanel'
+#alias playdir='find -name "*.mp3"| sed 's/\ /\\\ /g'| xargs play'
+#alias fk='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+#alias srvs='sudome service --status-all'
+#alias sysfailed='systemctl list-units --failed'
+#alias cleanlogs='sudome find /var/log/ -mtime +1 -name "*.log*" -exec rm -rf {} \; && journalctl --vacuum-size=50M;'
+
+# Functions
+if [ -f ~/.zsh_functions ]; then
+  . ~/.zsh_functions
+fi
+# Command Shortcuts with Password
+if [ -f ~/.zsh_passwd ]; then
+  . ~/.zsh_passwd
+fi
+
+# extra WSL
+if [ -f ~/.zsh_wsl ]; then
+  . ~/.zsh_wsl
+fi
+# extra Raspi
+if [ -f ~/.zsh_raspi ]; then
+  . ~/.zsh_raspi
+fi

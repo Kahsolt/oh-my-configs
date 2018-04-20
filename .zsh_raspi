@@ -1,0 +1,5 @@
+# extras for Raspi
+
+# Alias
+alias gpin='gpio readall'
+alias temp='vcgencmd measure_temp'
