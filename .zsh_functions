@@ -1,11 +1,11 @@
 # Functions
-function prx() {
+function prx() {	# 2017/9/5
   case $1 in
     on)
       export http_proxy=127.0.0.1:1080
       export https_proxy=127.0.0.1:1080
       # export ftp_proxy=user:password@proxy.abc.com:8080
-      export no_proxy=*.buaa.edu.cn,*.tuna.tsinghua.edu.cn,10.*.*.*,192.168.137.*,localhost,127.0.0.1,arkadia6
+      export no_proxy=*.buaa.edu.cn,*.tuna.tsinghua.edu.cn,10.*.*.*,192.168.137.*,localhost,127.*.*.*
       ;;
     off)
       export http_proxy=
@@ -18,10 +18,7 @@ function prx() {
       echo no_proxy=$no_proxy
       ;;
     *)
-      cat << HELP
-proxy status function - by Kahsolt 2017/9/5
-Usage: prx on|off|show
-HELP
+      echo "prx on|off|show"
       ;;
    esac
 }
@@ -33,72 +30,88 @@ function aptGo() {
   sudome apt -y autoremove
   sudome apt -y autoclean
 }
-
 function pacmanGo() {
   noProxy
   pacman -Syu
-  pacman -Qdt
-  #xargs pacman -Rncus
+  (pacman -Qdt | xargs pacman -Rncus) 2> /dev/null
 }
 alias pm='pacman'
 alias pms='pacman -S'
 
 function pipGo() {
   noProxy
-  sudome pip list --format=freeze | cut -d = -f 1 | xargs pip install --upgrade
-  sudome pip3 list --format=freeze | cut -d = -f 1 | xargs pip3 install --upgrade
+  sudome pip3 list --format=freeze | cut -d= -f1 | xargs pip3 install --upgrade
 }
-
 function gemGo() {
   noProxy
   sudome gem update
   sudome gem update --system
 }
 
-function nasmf() {
-  if [ $1 ]; then
-    asm -f elf64 $1
-    ld -m elf_x86_64 $1.o -o $1
-    chmod +x $1
-    yes|rm $out.o
-  else
-    cat << HELP
-nasm & ld function - by Kahsolt 2016/11/5
-Usage: nasmf <filename>   ; no suffix
-HELP
-  fi
+function nasmf() {	# 2016/11/5
+  [ -z $1 ] && {echo "nasmf <filename>"; return -1;}
+  
+  fn=$(echo $1 | cut -d. -f1)
+  nasm -f elf64 $1 \
+    && ld -m elf_x86_64 $fn.o -o $1 \
+    && chmod +x $1 \
+    && rm -rf $fn.o
 }
 
-function gccf() {
-  if [ $1 ]; then
-    gcc -ansi $1.c -o $1
-    chmod +x $1
-  else
-    cat << HELP
-gcc(ANSI) function - by Kahsolt 2017/9/15
-Usage: gccf <filename>   ; no suffix
-HELP
-  fi
+function gccf() {	# 2017/9/15
+  [ -z $1 ] && {echo "gccf <filename>"; return -1;}
+
+  fn=$(echo $1 | cut -d. -f1)
+  gcc -ansi $1 -o $fn \
+    && chmod +x $fn
 }
 
-function nvccf() {
-  if [ $1 ]; then
-    nvcc -ccbin clang-3.8 -arch sm_21 -Wno-deprecated-gpu-targets $1.cu -o $1
-  else
-    cat << HELP
-nvcc function - by Kahsolt 2017/9/21
-Usage: nvccf <filename>   ; no suffix
-HELP
-  fi
+function nvccf() {	# 2017/9/21
+  [ -z $1 ] && {echo "nvccf <filename>"; return -1;}
+
+  fn=$(echo $1 | cut -d. -f1)
+  nvcc -ccbin clang-3.8 -arch sm_21 -Wno-deprecated-gpu-targets $1 -o $fn
 }
 
-function 7za() {
-  if [ $1 ]; then
-    7z a -mx9 $1.7z $1
-  else
-    cat << HELP
-7z add function - by Kahsolt 2017/10/27
-Usage: 7za <dir/file name>
-HELP
-  fi
+function 7za() {	# 2017/10/27
+  [ -z $1 ] && {echo "7za <filename>"; return -1;}
+  
+  7z a -mx9 $1.7z $1
 }
+
+function cs() {		# 2018/05/08
+  [ -z $1 ] && {echo "cs <filename>"; return -1;}
+  
+  exts=(py rb lua)
+  bins=(python3 ruby2.3 lua5.3)
+  
+  idx=-1
+  ext=$(echo $1 | cut -d. -f2)
+  for ((i=1; i<=${#exts}; i++))
+  do
+    [ "$ext" = "$exts[i]" ] && {idx=$i; break;}
+  done
+  
+  [ $idx -eq -1 ] \
+    && (echo "#!/usr/bin/env $ext\n" > $1) \
+    || (echo "#!/usr/bin/env $bins[$idx]\n" > $1)
+}
+
+function hdup() {
+  echo "starting up hadoop..."
+  sudome /etc/init.d/ssh start
+  sleep 0.5 && start-dfs.sh
+  # sleep 0.5 && start-yarn.sh
+  sleep 0.5 && jps
+}
+function hddown() {
+  echo "shutting down hadoop..."
+  # stop-yarn.sh && sleep 0.5
+  stop-dfs.sh && sleep 0.5
+  sudome /etc/init.d/ssh stop && sleep 0.5
+  jps
+}
+alias fs='hdfs dfs'
+alias fsls='hdfs dfs -ls'
+alias fsrm='hdfs dfs -rm -r out'
+alias fscat='hdfs dfs -cat out/part-r-00000'

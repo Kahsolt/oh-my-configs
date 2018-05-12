@@ -43,9 +43,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 # start a program
 #bindsym $mod+Escape
 bindsym $mod+F1 exec pcmanfm --no-desktop
-bindsym $mod+F2 exec --no-startup-id chromium-browser --proxy-sever="SOCKS5://127.0.0.1:1080", workspace $ws2
-#bindsym $mod+F3 exec
-bindsym $mod+F4 exec --no-startup-id filezilla, workspace $ws4
+bindsym $mod+F2 exec --no-startup-id qupzilla, workspace $ws2
+bindsym $mod+F3 exec --no-startup-id filezilla, workspace $ws4
+#bindsym $mod+F4 exec # [CONFLICT ON WINDOWS]
 #bindsym $mod+F5 exec --no-startup-id icedove, workspace $ws5
 #bindsym $mod+F6 exec --no-startup-id telegram-desktop, workspace $ws6
 bindsym $mod+F7 exec --no-startup-id i3-sensible-terminal -e "mocp", workspace $ws7
@@ -59,28 +59,29 @@ bindsym Print exec scrot ~/Pictures/Screenshot/scrot_$wx$h_%Y%m%d-%H%M%S.png
 bindsym $mod+Print exec scrot -s ~/Pictures/Screenshot/scrot_$wx$h_%Y%m%d-%H%M%S.png
 
 # Fixed layout
-for_window [class="(?i)chromium"] layout stacking
-for_window [class="(?i)firefox"] layout stacking
-for_window [class="(?i)midori"] layout stacking
-for_window [class="(?i)tor-browser"] layout stacking
-assign [class="(?i)chromium"] → $ws2
-assign [class="(?i)firefox"] → $ws2
-assign [class="(?i)midori"] → $ws2
-assign [class="(?i)tor-browser"] → $ws2
+#for_window [class="(?i)chromium"] layout stacking
+#for_window [class="(?i)firefox"] layout stacking
+for_window [class="(?i)qupzilla"] layout stacking
+#for_window [class="(?i)midori"] layout stacking
+#for_window [class="(?i)tor-browser"] layout stacking
+#assign [class="(?i)chromium"] → $ws2
+#assign [class="(?i)firefox"] → $ws2
+assign [class="(?i)qupzilla"] → $ws2
+#assign [class="(?i)midori"] → $ws2
+#assign [class="(?i)tor-browser"] → $ws2
 
-assign [class="(?i)code"] → $ws3
-assign [class="(?i)pycharm"] → $ws3
-assign [class="(?i)charm"] → $ws3
-assign [class="(?i)idea"] → $ws3
-assign [class="(?i)rubymine"] → $ws3
-assign [class="(?i)clion"] → $ws3
-assign [class="(?i)phpstorm"] → $ws3
-assign [class="(?i)rstudio"] → $ws3
-assign [class="(?i)datagrid"] → $ws3
+#assign [class="(?i)code"] → $ws3
+#assign [class="(?i)pycharm"] → $ws3
+#assign [class="(?i)charm"] → $ws3
+#assign [class="(?i)idea"] → $ws3
+#assign [class="(?i)rubymine"] → $ws3
+#assign [class="(?i)clion"] → $ws3
+#assign [class="(?i)phpstorm"] → $ws3
+#assign [class="(?i)rstudio"] → $ws3
+#assign [class="(?i)datagrid"] → $ws3
 
-assign [class="(?i)telegram"] → $ws6
+#assign [class="(?i)telegram"] → $ws6
 assign [class="(?i)MPlayer"] → $ws8
-
 
 # kill focused window
 bindsym $mod+q kill
@@ -178,7 +179,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
 # 窗口微调

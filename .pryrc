@@ -1,5 +1,4 @@
 require 'json'
-#require 'socket'
 require 'byebug'
 require 'pathname'
 require 'securerandom'
@@ -41,14 +40,15 @@ def get_class_info(cl)
 		my_instance_private_methods -= cl.private_instance_methods
 	end
 
-
-	return my_public_methods,my_protected_methods,my_private_methods,my_variables,my_constants,my_class_variables,my_instance_public_methods,my_instance_protected_methods,my_instance_private_methods
+	return my_public_methods, my_protected_methods, my_private_methods, \
+			my_variables, my_constants, my_class_variables, \
+			my_instance_public_methods, my_instance_protected_methods, my_instance_private_methods
 end
 
 class Object
-	#打印自己定义的函数
+
 	def self_methods
-		#是否是实例
+
 		is_instance = nil
 		str = ""
 		if self.class == Class
@@ -59,7 +59,6 @@ class Object
 		elsif self.class == Module
 			str = "unsupport\n"
 		else
-			#实例
 			is_instance = true
 			my_public_methods = self.public_methods
 			parent = self.class.superclass
@@ -83,7 +82,6 @@ class Object
 			my_private_methods -= parent_private_methods
 		end
 
-
 		if my_public_methods && my_public_methods.size >0
 			str += "-Public Methods-\n#{my_public_methods.sort}\n"
 		end
@@ -93,14 +91,14 @@ class Object
 		if my_private_methods && my_private_methods.size >0
 			str+= "-Private Methods-\n#{my_private_methods.sort}\n"
 		end
-		#return str
-		Kernel.puts str
+
+		puts str
 	end
 
 	#打印相关信息
 	def info
 		str = ""
-		if self.class == Class || self.class==Module  #类
+		if self.class == Class || self.class == Module
 			my_public_methods,my_protected_methods,my_private_methods,my_variables,my_constants,my_class_variables,
 			my_instance_public_methods,my_instance_protected_methods,my_instance_private_methods = get_class_info self
 			
@@ -172,7 +170,6 @@ class Object
 				end
 			end
 		else
-			#实例
 			str += "Object: from class #{self.class}\n"
 			if self.singleton_methods.size>0
 				str += "Singleton methods:\n #{self.singleton_methods.sort}\n"
@@ -199,13 +196,13 @@ class Object
 			end
 
 		end
-		#return str
-		Kernel.puts str
+
+		puts str
 	end
 end
 
 class Class
-	#打印自己定义的实例函数
+
 	def self_instance_methods
 
 		my_public_methods = self.public_instance_methods
@@ -216,7 +213,6 @@ class Class
 		parent_public_methods = parent.public_instance_methods
 		parent_protected_methods = parent.protected_instance_methods
 		parent_private_methods = parent.private_instance_methods
-
 				
 		if my_public_methods
 			my_public_methods -= parent_public_methods
@@ -238,8 +234,8 @@ class Class
 		if my_private_methods && my_private_methods.size >0
 			str += "private methods#{my_private_methods.sort}\n"
 		end
-		#return str
-		Kernel.puts str
+
+		puts str
 	end
 
 	def all_info
@@ -249,6 +245,5 @@ class Class
 			Kernel.puts '-'*20
 			Kernel.puts "\n"
 		end
-		#Kernel.puts str
 	end
 end
