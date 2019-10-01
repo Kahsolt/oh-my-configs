@@ -1,0 +1,3 @@
+# Alias
+alias gpin='gpio readall'
+alias tmp='vcgencmd measure_temp'

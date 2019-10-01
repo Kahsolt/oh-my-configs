@@ -1,0 +1,5 @@
+# Official
+# deb https://apt.dockerproject.org/repo debian-wheezy main
+
+# Tsinghua
+# deb https://mirrors6.tuna.tsinghua.edu.cn/docker/apt/repo debian-wheezy main
