@@ -1,0 +1,12 @@
+{
+    "server":"2001:19f0:7001:22ec:5400:00ff:fe59:cb99",
+    "server_port":8388,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"kahsolt1379",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false,
+    "workers": 1,
+    "prefer_ipv6": true
+}

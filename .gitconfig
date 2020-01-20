@@ -1,8 +1,0 @@
-# This is Git's per-user configuration file.
-[user]
-name = Kahsolt Misst
-email = kahsolt@iriscraft.tk
-[push]
-default = simple
-[credential]
-helper = store

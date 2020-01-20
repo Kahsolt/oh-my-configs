@@ -1,0 +1,35 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: sslocal
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Shadowsocks client
+# Description: Shadowsocks client
+### END INIT INFO
+
+HOST4=45.32.58.2
+HOST6=2001:19f0:7001:22ec:5400:00ff:fe59:cb99
+HOST=$HOST6
+LOG_FILE=/var/log/sslocal.log
+CONFIG_FILE=/etc/shadowsocks/config.json
+
+case "$1" in
+  start)
+    # sslocal -s $HOST -k kahsolt1379 -d start
+    sslocal -c $CONFIG_FILE --log-file $LOG_FILE -d start
+  ;;
+  stop)
+    sslocal -c $CONFIG_FILE -d stop
+  ;;
+  restart)
+    $0 stop
+    $0 start
+  ;;
+  *)
+    echo "Usage: /etc/init.d/sslocal {start|stop|restart}"
+    exit 1
+  ;;
+esac
+exit 0
