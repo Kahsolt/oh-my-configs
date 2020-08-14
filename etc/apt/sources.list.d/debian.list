@@ -1,0 +1,10 @@
+# Debian 7 Wheezy
+deb https://mirrors6.tuna.tsinghua.edu.cn/debian wheezy main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian wheezy-updates main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian wheezy-backports main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian wheezy-backports-sloppy main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian wheezy-proposed-updates main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian-multimedia wheezy main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian-security wheezy main non-free contrib
+# deb https://mirrors6.tuna.tsinghua.edu.cn/debian-nonfree wheezy main non-free contrib
+

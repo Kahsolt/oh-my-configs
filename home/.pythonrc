@@ -1,0 +1,71 @@
+# system
+#import builtins
+import os
+#import sys
+import time
+#import threading
+# strings
+#import re
+#import json
+# numbers
+#import math
+#import random
+#import hashlib
+# data structs
+#import copy
+#import collections
+
+# debug
+from pprint import pprint as pp
+#from pprint import pformat as pf
+
+#from time import perf_counter as pc
+#from traceback import print_exc as wtf
+
+# file system
+#import bz2 as zip
+#import glob
+#import fileinput
+
+# web
+#import requests
+#import bs4
+#import lxml
+
+# data source
+#import csv
+import numpy as np
+#import pandas as pd
+#import pymysql as sql
+#import pymongo as mg
+#import elasticsearch as es
+
+# misc
+import matplotlib.pyplot as plt
+#import nltk
+#import networkx as nx
+#import scipy
+#import scipy.stats as sst
+#import tensorflow as tf
+#import sklearn
+#from sklearn import datasets as ds
+#from sklearn import svm
+
+# Alias Modules
+sys = np.sys
+math = np.math
+random = np.random
+
+# Alias Functions
+h = help
+sh = os.system
+ls = dir
+
+# Functions & Decorators
+#def timer(fn):
+#  def warpper(*args, **kwargs):
+#    start = time.time()
+#    fn(*args, **kwrags)
+#    end = time.time()
+#    print('[Timer]: ' + str(end - start))
+#  return wrapper

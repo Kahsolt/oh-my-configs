@@ -1,0 +1,119 @@
+# Functions
+function prx() {	# 2017/9/5
+  case $1 in
+    on)
+      export http_proxy=127.0.0.1:1080
+      export https_proxy=127.0.0.1:1080
+      #export ftp_proxy=user:password@proxy.abc.com:8080
+      export no_proxy=*.tuna.tsinghua.edu.cn,192.168.137.*,localhost,127.*.*.*
+      #export SOCKS_SERVER=127.0.0.1:1080
+      #export SOCKS_VERSION=5
+      ;;
+    off)
+      export http_proxy=
+      export https_proxy=
+      ;;
+    show)
+      echo http_proxy=$http_proxy
+      echo https_proxy=$https_proxy
+      echo ftp_proxy=$ftp_proxy
+      echo no_proxy=$no_proxy
+      ;;
+    *)
+      echo "prx on|off|show"
+      ;;
+  esac
+}
+alias noProxy='prx off'
+
+alias aptGo='noProxy \
+  && sudome apt -y update && apt -y upgrade \
+  && sudome apt -y autoremove \
+  && sudome apt -y autoclean'
+#alias pacmanGo='noProxy \
+#  && pacman -Syu \
+#  && (pacman -Qdt | xargs pacman -Rncus) 2> /dev/null'
+#alias pm='pacman'
+#alias pms='pacman -S'
+#alias pipGo='noProxy && sudome pip3 list --format=freeze | cut -d= -f1 | xargs pip3 install --upgrade'
+#alias gemGo='noProxy && sudome gem update && sudome gem update --system'
+
+function nasmf() {	# 2016/11/5
+  [ -z $1 ] && {echo "nasmf <filename>"; return -1;}
+  
+  fn=$(echo $1 | cut -d. -f1)
+  nasm -f elf64 $1 \
+    && ld -m elf_x86_64 $fn.o -o $1 \
+    && chmod +x $1 \
+    && rm -rf $fn.o
+}
+
+function gccf() {	# 2017/9/15
+  [ -z $1 ] && {echo "gccf <filename>"; return -1;}
+
+  fn=$(echo $1 | cut -d. -f1)
+  ext=$(echo $1 | cut -d. -f2)
+  if [ "$ext" = "c" ]; then
+    gcc -ansi -lm $1 -o $fn
+  else
+    g++ -std=c++11 -lm $1 -o $fn
+  fi
+}
+
+function nvccf() {	# 2017/9/21
+  [ -z $1 ] && {echo "nvccf <filename>"; return -1;}
+
+  fn=$(echo $1 | cut -d. -f1)
+  nvcc -ccbin clang-3.8 -arch sm_21 -Wno-deprecated-gpu-targets $1 -o $fn
+}
+
+function 7za() {	# 2017/10/27
+  [ -z $1 ] && {echo "7za <filename>"; return -1;}
+  
+  7z a -mx9 $1.7z $1
+}
+
+function cs() {		# 2018/05/08
+  [ -z $1 ] && {echo "cs <filename>"; return -1;}
+  [ -f $1 ] && {$EDITOR $1; return 0;}
+
+  exts=(py rb lua)
+  bins=(python3 ruby2.3 lua5.3)
+    
+  idx=-1
+  ext=$(echo $1 | cut -d. -f2)
+  for ((i=1; i<=${#exts}; i++)); do
+    [ "$ext" = "$exts[i]" ] && {idx=$i; break;}
+  done
+
+  dat=$(date '+%Y/%m/%d')
+  [ $idx -eq -1 ] && bin=${ext} || bin=$bins[$idx]
+  echo "#!/usr/bin/env $bin\n# $dat\n" > $1
+
+  $EDITOR $1
+}
+function mk() {	# 2018/06/24
+  fn='Makefile'
+  [ -f $fn ] && { make $*; return 0; }
+  echo -e "all:\n\t\ntest:\n\t\nclean:\n\trm -rf \n" > $fn \
+    && $EDITOR $fn
+}
+
+function hdup() {
+  echo "starting up hadoop..."
+  sudome /etc/init.d/ssh start
+  sleep 1 && start-dfs.sh
+  # sleep 1 && start-yarn.sh
+  sleep 1 && jps
+}
+function hddown() {
+  echo "shutting down hadoop..."
+  # stop-yarn.sh && sleep 1
+  stop-dfs.sh && sleep 1
+  sudome /etc/init.d/ssh stop && sleep 1
+  jps
+}
+alias fs='hdfs dfs'
+alias fsls='hdfs dfs -ls'
+alias fsrm0='hdfs dfs -rm -r out'
+alias fscat0='hdfs dfs -cat out/part-r-00000'

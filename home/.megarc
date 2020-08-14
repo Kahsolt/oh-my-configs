@@ -1,0 +1,9 @@
+[Login]
+Username = kahsolt@qq.com
+Password = YLQkahsolt_
+
+[Network]
+; 1MiB/s, no limit
+SpeedLimit = 0
+; Use over TOR
+Proxy = socks5://127.0.0.1:1080

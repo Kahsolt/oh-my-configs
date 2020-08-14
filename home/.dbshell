@@ -1,0 +1,99 @@
+db.user.find()
+db.user.update({"username": "ks"}, {$push: {"firndes": 5}})
+db.user.find()
+db.user.update({"username": "ks"}, {$push: {"firndes": 6545445}})
+db.user.find()
+db.user.updateAll({"username": "ks"}, {$push: {"firndes": 6545445}})
+db.user.find({"username": "ks"})
+db.user.count({"username": "ks"})
+db.user.find({"username": "ks"})
+use lethe
+db.user.find({"username": "ks"})
+show dbs
+use lethe
+show collections
+db.lethe.find()
+db.User.find()
+db.user.find()
+db.user.count()
+db.drop()
+db.dropDatabase()
+show dbs;
+show dbs;
+use lethe
+show collectionsl
+show collections;
+db.auth.find()
+db.auth.find();
+use lethe;
+show collections;
+db['ath']
+db['auth']
+db.user
+db.user.count()
+db.user.find()
+db.createCollection('chat')
+db.chat
+db.chat.insert({members:[0,1,2,5,9], messages:[]})
+db.chat.insert({members:[8,5,2,6,], messages:[]})
+db.chat.insert({members:[4,3,9,5], messages:[]})
+db.chat.find()
+db.chat.find({"$in" : members})
+db.chat.find({"$in" : 1})
+db.chat.find({"$in" : [1,2,3]})
+db.chat.find(members: {"$in" : [1,2,3]})
+db.chat.find({members: {"$in" : [1,2,3]}})
+db.chat.find({members: 1})
+db.chat.find({members: 2})
+db.chat.find({members: 3})
+db.chat.find({members: 9})
+use lethe
+db.user.find()
+db.user.delete()
+db.user.delete({})
+db.user.remove()
+db.user.remove({})
+db.user.find()
+show collections;
+db.user.find()
+it
+show collections;
+db.find.user()
+db.user.find()
+it
+db.user.delete({'username':['ks','kahsolt']})
+db.user.delete({'username':'ks'})
+db.user.remove({'username':'ks'})
+db.user.remove({'username':'kahsolt'})
+show dbs;
+use NG
+show col;
+show collections;
+db.baidu.count()
+db.baidu.find(0)
+db.baidu.find(1)
+db.baidu.findOne()
+db.baidu.count()
+db,drop()
+db.drop()
+db.dropDatabase()
+show dbs;
+use Doujinshi;
+show collections;
+use Shotachan;
+db.Shotachan
+db.Shotachan.count()
+db.Shotachan.find()
+db.dropDatabase()
+show dbs;
+db.dropDatabase()
+show dbs;
+use local
+show dbs;
+db.dropDatabase()
+show dbs;
+use Doujinshi;
+db.Shotachan.count()
+db.Shotachan.findOne()
+db.Shotachan.findOne({},{"raw":null})
+show dbs;

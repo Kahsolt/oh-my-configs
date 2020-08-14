@@ -1,0 +1,50 @@
+# Vars
+BGIMG=$HOME/Pictures/Shota/Shotachan/Telegram/photo_2017-12-10_10-15-54.jpg
+
+# Functions
+function wsl_init() {
+  umask 022
+  export DISPLAY=:0
+  export LC_ALL="zh_CN.UTF-8"
+  export QT_IM_MODULE=fcitx
+  export GTK_IM_MODULE=fcitx
+  export XMODIFIERS="@im=fcitx"
+  (sudome $SHELL -c "cat $HOME/.hosts >> /etc/hosts") > /dev/null
+  clear
+}
+function wsl_exit() {
+  procs=(sshd mysqld_safe mongod redis-server rabbitmq-server nginx polipo)
+  scripts=(ssh mysql mongodb redis-server rabbitmq-server nginx polipop)
+
+  for ((i=1; i<=${#exts}; i++)); do
+    [[ -n $(ps -C procs[$i] -o pid=) ]] \
+      && sudo /etc/init.d/scripts[$i] stop
+  done
+}
+function i3() {
+  [[ -n $(ps -C i3 -o pid=) ]] && return
+
+  sudome mount -t tmpfs -o noatime,nodiratime,nodev tmpfs /tmp
+  cmd.exe /C xinit.cmd
+  compton -b
+  feh --bg-fill $BGIMG
+  /usr/bin/i3 &
+  clear
+}
+function i3x() {
+  ps ax | egrep pts \
+    && echo "shutting down i3 in 3s..." \
+    && sleep 2
+  pkill i3 || pkill -9 i3
+  cmd.exe /C "tskill vcxsrv /V"
+  sudome umount /tmp
+  clear
+}
+function im() {
+  (fcitx-autostart > /dev/null) &
+  (sogou-qimpanel > /dev/null)  &
+}
+function imx() {
+  pkill sogou-qimpanel || pkill -9 sogou-qimpanel
+  pkill fcitx || pkill -9 fcitx
+}

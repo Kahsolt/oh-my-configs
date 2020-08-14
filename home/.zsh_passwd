@@ -1,0 +1,7 @@
+# Shortcuts Password
+#alias megals='mega-ls -R'
+#alias megalogin='mega-login kahsolt@qq.com YLQkahsolt_ && mega-whoami && mega-ls -R'
+alias mysqlArkadia='mysql -h arkadia -uroot -pYLQ-kahsolt'
+alias mongoArkadia='mongo arkadia/admin -uroot -pYLQ-kahsolt'
+#alias sshTunnelSsh='ssh -fN -R 7000:localhost:22 kahsolt@Arkadia'	# 把本地22号端口转发到Arkadia的7000号端口，允许kahsolt在远程登录
+#alias sshTunnelHttp='ssh -fNgR 8080:localhost:80 kahsolt@Arkadia'

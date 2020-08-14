@@ -1,0 +1,12 @@
+# VPS
+207.148.72.136  arkadia         # Vultr VPS(Singapore)
+211.159.146.165 lab             # BUAA Lab	root:kahsolt(NO_SSH_ROOT)
+123.206.56.219  hakumano        # 刘灏      root:123456789asd
+52.231.184.198	llk				# llk Lab	lincoln:A235671422llk
+# Raspi
+192.168.137.3   raspi
+# Hadoop Cluster
+192.168.137.1   master
+192.168.137.3   slave
+# BUAA Cluster
+10.254.13.2     cluster         # jiangsongru:kahsolt1379
